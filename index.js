@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: false }))
 
 app.set("view engine", "ejs");
 
+app.use(express.static("public"));
+
 // method: POST
 app.post('/shrink', async (req, res) => {
     const { longUrl } = req.body;
@@ -70,6 +72,10 @@ app.get("/:code", async(req, res)=>{
         console.error(err);
         res.status(500).json("Server error");
     }
+})
+
+app.get("/", (req, res)=>{
+    res.render('index');
 })
 
 app.listen(process.env.PORT);
